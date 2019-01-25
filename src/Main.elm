@@ -108,10 +108,10 @@ discover (x, y) model =
           if model.mode == Normal then
             (model, Cmd.none)
           else
-            toggleFlagField (x, y) True model
+            toggleFlagField (x, y) False model
         (Just Hidden) ->
           if model.mode == Marker then
-            toggleFlagField (x, y) False model
+            toggleFlagField (x, y) True model
           else if (isBomb (x,y) model.bombs) then
             let board = setField (x, y) Exploded model.board in
             ({ model | board = board, running = False }

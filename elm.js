@@ -5212,7 +5212,7 @@ var author$project$Main$discover = F2(
 							return _Utils_eq(model.mode, author$project$Main$Normal) ? _Utils_Tuple2(model, elm$core$Platform$Cmd$none) : A3(
 								author$project$Main$toggleFlagField,
 								_Utils_Tuple2(x, y),
-								true,
+								false,
 								model);
 						case 'Hidden':
 							var _n5 = field.a;
@@ -5220,7 +5220,7 @@ var author$project$Main$discover = F2(
 								return A3(
 									author$project$Main$toggleFlagField,
 									_Utils_Tuple2(x, y),
-									false,
+									true,
 									model);
 							} else {
 								if (A2(
