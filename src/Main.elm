@@ -13,11 +13,15 @@ type Mode = Normal | Marker
 
 type alias Board = Array (Array Field)
 
-type alias Model = { board: Board
+type GameStatus = Stopped | Running | Won | Lost
+
+type alias Model = { size: (Int, Int)
+                  , discovered: Int
+                  , board: Board
                   , bombs: List (Int, Int)
                   , mode: Mode
                   , flags: List (Int, Int)
-                  , running: Bool
+                  , status: GameStatus
                 }
 
 type Msg = Start
@@ -36,12 +40,15 @@ onRightClick m =
       , stopPropagation = True
       })
 
-genBoard: Int -> Int -> Board
-genBoard x y = Array.repeat x (Array.repeat y Hidden)
+genBoard: (Int, Int) -> Board
+genBoard (x, y) = Array.repeat x (Array.repeat y Hidden)
 
 init: Int -> (Model, Cmd msg)
 init _ = (
-  { board = (genBoard 8 8), bombs = [], mode = Normal , flags = [], running = False}
+  { board = (genBoard (8, 8))
+    , bombs = [], discovered = 0, size = (8, 8), mode = Normal
+    , flags = [], status = Stopped
+  }
   , Cmd.none
   )
 
@@ -94,9 +101,16 @@ toggleFlagField (x, y) toggle model =
   ({ model | flags = flags, board = board }
     , Cmd.none)
 
+statFor: (Int, Int) -> Int -> Int -> GameStatus -> GameStatus
+statFor (sx, sy) bombCount discovered status =
+  case status of
+    Running ->
+      if discovered == (sx * sy - bombCount) then Won else status
+    _ -> status
+
 discover: (Int, Int) -> Model -> (Model, Cmd Msg)
 discover (x, y) model =
-  if not model.running then
+  if not (model.status == Running) then
       (model, Cmd.none)
     else
       let
@@ -114,20 +128,27 @@ discover (x, y) model =
             toggleFlagField (x, y) True model
           else if (isBomb (x,y) model.bombs) then
             let board = setField (x, y) Exploded model.board in
-            ({ model | board = board, running = False }
+            ({ model | board = board, status = Lost }
               , Cmd.none)
           else
             let c = nearBombsCount (x, y) model.bombs in
             case c of
               0 ->
                 if (discoverable (x, y) model) then
-                  let b = setField (x, y) Blank model.board in
-                  populatedBlanks (x, y) {model | board = b}
+                  let
+                    b = setField (x, y) Blank model.board
+                    discovered = model.discovered + 1
+                  in
+                  populatedBlanks (x, y) {model | board = b
+                                                , discovered = discovered}
                 else
                   (model, Cmd.none)
               _ ->
-                let board = setField (x, y) (Number c) model.board in
-                ({ model | board = board }
+                let
+                  board = setField (x, y) (Number c) model.board
+                  discovered = model.discovered + 1
+                in
+                ({ model | board = board, discovered = discovered }
                 , Cmd.none)
         _ -> (model, Cmd.none)
 
@@ -138,7 +159,8 @@ update: Msg -> Model -> (Model, Cmd Msg)
 update msg model =
   case msg of
     Start ->
-      ({ model | board = (genBoard 8 8), bombs = [], flags = [], running = False }, genBomb)
+      ({ model | board = (genBoard model.size)
+      , discovered = 0, bombs = [], flags = [], status = Running }, genBomb)
     NewGame b ->
       if (List.member b model.bombs) then
         (model, genBomb)
@@ -147,13 +169,19 @@ update msg model =
           bombs = List.sort (b :: model.bombs)
           cmd = if (List.length bombs) == 10 then Cmd.none else genBomb
         in
-        ({ model | bombs = bombs, running = True }, cmd)
+        ({ model | bombs = bombs, status = Running }, cmd)
     ToggleMode ->
       let mode = if model.mode == Normal then Marker else Normal in
       ({ model | mode = mode }, Cmd.none)
-    Click x y -> discover (x, y) model
+    Click x y ->
+      let (m, c) = discover (x, y) model in
+      (
+        { m |
+          status = statFor m.size (List.length m.bombs) m.discovered m.status
+        }, c
+      )
     ToggleFlag x y ->
-      if model.running then
+      if model.status == Running then
         let field = Array.get x model.board |> andThen (Array.get y) in
         case field of
           Just Flag -> toggleFlagField (x, y) False model
