@@ -218,10 +218,14 @@ toHtmlField x y f =
   let
     attributes = [ onClick (Click x y)
                   ,onRightClick (ToggleFlag x y)
-                  ,style "height" "20px"
-                  ,style "width" "20px"
+                  ,style "text-align" "center"
+                  ,style "size" "36px"
+                  ,style "height" "36px"
+                  ,style "width" "36px"
                   ,style "background-color"
-                    (if f == Blank then "lightgrey" else "darkgrey")
+                    (if (f == Hidden || f == Flag)
+                      then "darkgrey"
+                      else "lightgrey")
                   ]
   in
   case f of

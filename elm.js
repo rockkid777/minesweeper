@@ -5744,12 +5744,14 @@ var author$project$Main$toHtmlField = F3(
 				A2(author$project$Main$Click, x, y)),
 				author$project$Main$onRightClick(
 				A2(author$project$Main$ToggleFlag, x, y)),
-				A2(elm$html$Html$Attributes$style, 'height', '20px'),
-				A2(elm$html$Html$Attributes$style, 'width', '20px'),
+				A2(elm$html$Html$Attributes$style, 'text-align', 'center'),
+				A2(elm$html$Html$Attributes$style, 'size', '36px'),
+				A2(elm$html$Html$Attributes$style, 'height', '36px'),
+				A2(elm$html$Html$Attributes$style, 'width', '36px'),
 				A2(
 				elm$html$Html$Attributes$style,
 				'background-color',
-				_Utils_eq(f, author$project$Main$Blank) ? 'lightgrey' : 'darkgrey')
+				(_Utils_eq(f, author$project$Main$Hidden) || _Utils_eq(f, author$project$Main$Flag)) ? 'darkgrey' : 'lightgrey')
 			]);
 		switch (f.$) {
 			case 'Hidden':
