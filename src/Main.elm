@@ -70,6 +70,18 @@ nearBombsCount: (Int, Int) -> List (Int, Int) -> Int
 nearBombsCount (x, y) bombs =
   List.length (List.filter (\f -> List.member f bombs) (neighbours (x, y)))
 
+nearFieldsOf: Field -> (Int, Int) -> Array (Array Field) -> List (Int, Int)
+nearFieldsOf field (x, y) board =
+  let
+    fn = (\(x1, y1) ->
+      (Array.get x1 board |> andThen (\r -> Array.get y1 r)) == Just field)
+  in
+  List.filter fn (neighbours (x, y))
+
+nearFlagsCount: (Int, Int) -> Array (Array Field) -> Int
+nearFlagsCount (x, y) board =
+  List.length (nearFieldsOf Flag (x, y) board)
+
 first: (a -> Bool) -> List a -> Maybe a
 first f l = List.head <| List.filter f l
 
@@ -84,9 +96,14 @@ setField (x, y) f board =
     (Just row) -> Array.set x (Array.set y f row) board
     _ -> board
 
-populatedBlanks: (Int, Int) -> Model -> (Model, Cmd Msg)
-populatedBlanks (x, y) model =
-  List.foldl (\p (m, _) -> discover p m) (model, Cmd.none) (neighbours (x, y))
+discoverNeighbours: (Int, Int) -> Bool -> Model -> (Model, Cmd Msg)
+discoverNeighbours (x, y) restricted model =
+  let
+    nl = if restricted
+      then nearFieldsOf Hidden (x, y) model.board
+      else neighbours (x, y)
+  in
+  List.foldl (\p (m, _) -> discover p m) (model, Cmd.none) nl
 
 toggleFlagField: (Int, Int) -> Bool -> Model -> (Model, Cmd Msg)
 toggleFlagField (x, y) toggle model =
@@ -139,7 +156,7 @@ discover (x, y) model =
                     b = setField (x, y) Blank model.board
                     discovered = model.discovered + 1
                   in
-                  populatedBlanks (x, y) {model | board = b
+                  discoverNeighbours (x, y) False {model | board = b
                                                 , discovered = discovered}
                 else
                   (model, Cmd.none)
@@ -150,6 +167,11 @@ discover (x, y) model =
                 in
                 ({ model | board = board, discovered = discovered }
                 , Cmd.none)
+        Just (Number n) ->
+          if (nearFlagsCount (x, y) model.board) == n then
+            discoverNeighbours (x, y) True model
+          else
+            (model, Cmd.none)
         _ -> (model, Cmd.none)
 
 genBomb: Cmd Msg
