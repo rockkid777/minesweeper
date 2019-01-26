@@ -5657,6 +5657,295 @@ var author$project$Main$update = F2(
 	});
 var author$project$Main$Start = {$: 'Start'};
 var author$project$Main$ToggleMode = {$: 'ToggleMode'};
+var elm$json$Json$Decode$map = _Json_map1;
+var elm$json$Json$Decode$map2 = _Json_map2;
+var elm$json$Json$Decode$succeed = _Json_succeed;
+var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
+	switch (handler.$) {
+		case 'Normal':
+			return 0;
+		case 'MayStopPropagation':
+			return 1;
+		case 'MayPreventDefault':
+			return 2;
+		default:
+			return 3;
+	}
+};
+var elm$svg$Svg$trustedNode = _VirtualDom_nodeNS('http://www.w3.org/2000/svg');
+var elm$svg$Svg$g = elm$svg$Svg$trustedNode('g');
+var elm$svg$Svg$line = elm$svg$Svg$trustedNode('line');
+var elm$svg$Svg$Attributes$class = _VirtualDom_attribute('class');
+var elm$svg$Svg$Attributes$fill = _VirtualDom_attribute('fill');
+var elm$svg$Svg$Attributes$stroke = _VirtualDom_attribute('stroke');
+var elm$svg$Svg$Attributes$style = _VirtualDom_attribute('style');
+var elm$svg$Svg$Attributes$x1 = _VirtualDom_attribute('x1');
+var elm$svg$Svg$Attributes$x2 = _VirtualDom_attribute('x2');
+var elm$svg$Svg$Attributes$y1 = _VirtualDom_attribute('y1');
+var elm$svg$Svg$Attributes$y2 = _VirtualDom_attribute('y2');
+var author$project$Visuals$deadEyes = A2(
+	elm$svg$Svg$g,
+	_List_fromArray(
+		[
+			elm$svg$Svg$Attributes$class('eyes'),
+			elm$svg$Svg$Attributes$stroke('black'),
+			elm$svg$Svg$Attributes$fill('black'),
+			elm$svg$Svg$Attributes$style('stroke-width: 10; stroke-linecap: round')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$svg$Svg$g,
+			_List_fromArray(
+				[
+					elm$svg$Svg$Attributes$class('eye')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					elm$svg$Svg$line,
+					_List_fromArray(
+						[
+							elm$svg$Svg$Attributes$x1('70'),
+							elm$svg$Svg$Attributes$y1('70'),
+							elm$svg$Svg$Attributes$x2('120'),
+							elm$svg$Svg$Attributes$y2('120')
+						]),
+					_List_Nil),
+					A2(
+					elm$svg$Svg$line,
+					_List_fromArray(
+						[
+							elm$svg$Svg$Attributes$x1('70'),
+							elm$svg$Svg$Attributes$y1('120'),
+							elm$svg$Svg$Attributes$x2('120'),
+							elm$svg$Svg$Attributes$y2('70')
+						]),
+					_List_Nil)
+				])),
+			A2(
+			elm$svg$Svg$g,
+			_List_fromArray(
+				[
+					elm$svg$Svg$Attributes$class('eye')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					elm$svg$Svg$line,
+					_List_fromArray(
+						[
+							elm$svg$Svg$Attributes$x1('180'),
+							elm$svg$Svg$Attributes$y1('70'),
+							elm$svg$Svg$Attributes$x2('230'),
+							elm$svg$Svg$Attributes$y2('120')
+						]),
+					_List_Nil),
+					A2(
+					elm$svg$Svg$line,
+					_List_fromArray(
+						[
+							elm$svg$Svg$Attributes$x1('180'),
+							elm$svg$Svg$Attributes$y1('120'),
+							elm$svg$Svg$Attributes$x2('230'),
+							elm$svg$Svg$Attributes$y2('70')
+						]),
+					_List_Nil)
+				]))
+		]));
+var elm$svg$Svg$path = elm$svg$Svg$trustedNode('path');
+var elm$svg$Svg$Attributes$d = _VirtualDom_attribute('d');
+var author$project$Visuals$sadMouth = A2(
+	elm$svg$Svg$g,
+	_List_fromArray(
+		[
+			elm$svg$Svg$Attributes$class('mouth'),
+			elm$svg$Svg$Attributes$stroke('black'),
+			elm$svg$Svg$Attributes$fill('black'),
+			elm$svg$Svg$Attributes$style('stroke-width: 10; stroke-linecap: round')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$svg$Svg$path,
+			_List_fromArray(
+				[
+					elm$svg$Svg$Attributes$d('M 90 220 s 60 -120 120 0'),
+					elm$svg$Svg$Attributes$fill('none')
+				]),
+			_List_Nil)
+		]));
+var elm$core$List$append = F2(
+	function (xs, ys) {
+		if (!ys.b) {
+			return xs;
+		} else {
+			return A3(elm$core$List$foldr, elm$core$List$cons, ys, xs);
+		}
+	});
+var elm$svg$Svg$circle = elm$svg$Svg$trustedNode('circle');
+var elm$svg$Svg$svg = elm$svg$Svg$trustedNode('svg');
+var elm$svg$Svg$Attributes$cx = _VirtualDom_attribute('cx');
+var elm$svg$Svg$Attributes$cy = _VirtualDom_attribute('cy');
+var elm$svg$Svg$Attributes$r = _VirtualDom_attribute('r');
+var elm$svg$Svg$Attributes$viewBox = _VirtualDom_attribute('viewBox');
+var author$project$Visuals$withFace = function (nodes) {
+	return A2(
+		elm$svg$Svg$svg,
+		_List_fromArray(
+			[
+				elm$svg$Svg$Attributes$viewBox('0 0 300 300')
+			]),
+		A2(
+			elm$core$List$append,
+			_List_fromArray(
+				[
+					A2(
+					elm$svg$Svg$circle,
+					_List_fromArray(
+						[
+							elm$svg$Svg$Attributes$cx('150'),
+							elm$svg$Svg$Attributes$cy('150'),
+							elm$svg$Svg$Attributes$r('145'),
+							elm$svg$Svg$Attributes$fill('yellow')
+						]),
+					_List_Nil)
+				]),
+			nodes));
+};
+var author$project$Visuals$lostFace = author$project$Visuals$withFace(
+	_List_fromArray(
+		[author$project$Visuals$deadEyes, author$project$Visuals$sadMouth]));
+var author$project$Visuals$neutralMouth = A2(
+	elm$svg$Svg$g,
+	_List_fromArray(
+		[
+			elm$svg$Svg$Attributes$class('mouth'),
+			elm$svg$Svg$Attributes$stroke('black'),
+			elm$svg$Svg$Attributes$fill('black'),
+			elm$svg$Svg$Attributes$style('stroke-width: 10; stroke-linecap: round')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$svg$Svg$line,
+			_List_fromArray(
+				[
+					elm$svg$Svg$Attributes$x1('100'),
+					elm$svg$Svg$Attributes$y1('200'),
+					elm$svg$Svg$Attributes$x2('200'),
+					elm$svg$Svg$Attributes$y2('200')
+				]),
+			_List_Nil)
+		]));
+var author$project$Visuals$runningEyes = A2(
+	elm$svg$Svg$g,
+	_List_fromArray(
+		[
+			elm$svg$Svg$Attributes$class('eyes'),
+			elm$svg$Svg$Attributes$stroke('black'),
+			elm$svg$Svg$Attributes$fill('black')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$svg$Svg$g,
+			_List_fromArray(
+				[
+					elm$svg$Svg$Attributes$class('eye')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					elm$svg$Svg$circle,
+					_List_fromArray(
+						[
+							elm$svg$Svg$Attributes$cx('90'),
+							elm$svg$Svg$Attributes$cy('100'),
+							elm$svg$Svg$Attributes$r('30')
+						]),
+					_List_Nil)
+				])),
+			A2(
+			elm$svg$Svg$g,
+			_List_fromArray(
+				[
+					elm$svg$Svg$Attributes$class('eye')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					elm$svg$Svg$circle,
+					_List_fromArray(
+						[
+							elm$svg$Svg$Attributes$cx('210'),
+							elm$svg$Svg$Attributes$cy('100'),
+							elm$svg$Svg$Attributes$r('30')
+						]),
+					_List_Nil)
+				]))
+		]));
+var author$project$Visuals$runningFace = author$project$Visuals$withFace(
+	_List_fromArray(
+		[author$project$Visuals$runningEyes, author$project$Visuals$neutralMouth]));
+var author$project$Visuals$sunglasses = A2(
+	elm$svg$Svg$g,
+	_List_fromArray(
+		[
+			elm$svg$Svg$Attributes$class('eyes'),
+			elm$svg$Svg$Attributes$stroke('black'),
+			elm$svg$Svg$Attributes$fill('black')
+		]),
+	_List_fromArray(
+		[
+			A2(
+			elm$svg$Svg$g,
+			_List_fromArray(
+				[
+					elm$svg$Svg$Attributes$class('sunglass')
+				]),
+			_List_fromArray(
+				[
+					A2(
+					elm$svg$Svg$path,
+					_List_fromArray(
+						[
+							elm$svg$Svg$Attributes$d('M 40 90 q 50 80 100 0 ')
+						]),
+					_List_Nil),
+					A2(
+					elm$svg$Svg$path,
+					_List_fromArray(
+						[
+							elm$svg$Svg$Attributes$d('M 160 90 q 50 80 100 0 ')
+						]),
+					_List_Nil),
+					A2(
+					elm$svg$Svg$line,
+					_List_fromArray(
+						[
+							elm$svg$Svg$Attributes$x1('120'),
+							elm$svg$Svg$Attributes$y1('100'),
+							elm$svg$Svg$Attributes$x2('180'),
+							elm$svg$Svg$Attributes$y2('100'),
+							elm$svg$Svg$Attributes$style('stroke-width: 5')
+						]),
+					_List_Nil)
+				]))
+		]));
+var author$project$Visuals$wonFace = author$project$Visuals$withFace(
+	_List_fromArray(
+		[author$project$Visuals$sunglasses, author$project$Visuals$neutralMouth]));
+var author$project$Main$faceFor = function (status) {
+	switch (status.$) {
+		case 'Lost':
+			return author$project$Visuals$lostFace;
+		case 'Won':
+			return author$project$Visuals$wonFace;
+		default:
+			return author$project$Visuals$runningFace;
+	}
+};
 var author$project$Main$textForMode = function (m) {
 	if (m.$ === 'Normal') {
 		return 'Normal';
@@ -5674,21 +5963,6 @@ var author$project$Main$ToggleFlag = F2(
 	});
 var elm$virtual_dom$VirtualDom$Custom = function (a) {
 	return {$: 'Custom', a: a};
-};
-var elm$json$Json$Decode$map = _Json_map1;
-var elm$json$Json$Decode$map2 = _Json_map2;
-var elm$json$Json$Decode$succeed = _Json_succeed;
-var elm$virtual_dom$VirtualDom$toHandlerInt = function (handler) {
-	switch (handler.$) {
-		case 'Normal':
-			return 0;
-		case 'MayStopPropagation':
-			return 1;
-		case 'MayPreventDefault':
-			return 2;
-		default:
-			return 3;
-	}
 };
 var elm$virtual_dom$VirtualDom$on = _VirtualDom_on;
 var elm$html$Html$Events$custom = F2(
@@ -5905,6 +6179,18 @@ var author$project$Main$view = function (model) {
 					[
 						elm$html$Html$text(
 						elm$core$String$fromInt(flagCount))
+					])),
+				A2(
+				elm$html$Html$div,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$class('faceholder'),
+						A2(elm$html$Html$Attributes$style, 'height', '50px'),
+						A2(elm$html$Html$Attributes$style, 'width', '50px')
+					]),
+				_List_fromArray(
+					[
+						author$project$Main$faceFor(model.status)
 					])),
 				A2(
 				elm$html$Html$button,

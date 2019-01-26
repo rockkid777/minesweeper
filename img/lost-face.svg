@@ -1,0 +1,17 @@
+<svg viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <circle cx="150" cy="150" r="145" fill="yellow"/>
+  <g class="eyes" stroke="black" fill="black" style="stroke-width: 10; stroke-linecap: round">
+    <g class="eye">
+      <line x1="70" y1="70" x2="120" y2="120" />
+      <line x1="70" y1="120" x2="120" y2="70" />
+    </g>
+    <g class="eye">
+      <line x1="180" y1="70" x2="230" y2="120" />
+      <line x1="180" y1="120" x2="230" y2="70" />
+    </g>
+  </g>
+  <g class="mouth" stroke="black" fill="black"
+    style="stroke-width: 10; stroke-linecap: round">
+    <path d="M 90 220 s 60 -120 120 0" fill="none"/>
+  </g>
+</svg>

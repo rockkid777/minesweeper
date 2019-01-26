@@ -1,11 +1,13 @@
+module Main exposing (init)
 import Browser
 import Array exposing (Array)
 import Maybe exposing (andThen)
-import Html exposing (Html, button, div, text, table, td, tr, i)
+import Html exposing (Html, button, div, text, table, td, tr, i, embed)
 import Html.Events exposing(onClick)
-import Html.Attributes exposing(style, class)
+import Html.Attributes exposing(style, class, src)
 import Random exposing (list, int, pair)
 import Json.Decode as Decode
+import Visuals exposing (..)
 
 type Field = Hidden | Blank | Mine | Flag | Exploded | Number Int
 
@@ -247,11 +249,20 @@ textForMode m =
     Normal -> "Normal"
     _ -> "Marker"
 
+faceFor: GameStatus -> Html msg
+faceFor status =
+  case status of
+    Lost -> lostFace
+    Won -> wonFace
+    _ -> runningFace
+
 view: Model -> Html Msg
 view model =
   let flagCount = (List.length model.bombs) - (List.length model.flags) in
   div [] [ button [onClick Start] [text "Start!"]
         , div [] [text (String.fromInt flagCount)]
+        , div [class "faceholder", style "height" "50px", style "width" "50px"]
+          [faceFor model.status]
         , button [onClick ToggleMode] [text (textForMode model.mode)]
         , table []
             (Array.toList (Array.indexedMap toHtmlRow model.board))
