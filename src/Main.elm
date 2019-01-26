@@ -2,7 +2,7 @@ module Main exposing (init)
 import Browser
 import Array exposing (Array)
 import Maybe exposing (andThen)
-import Html exposing (Html, button, div, text, table, td, tr, i, embed)
+import Html exposing (Html, button, div, text, table, td, tr, i, p)
 import Html.Events exposing(onClick)
 import Html.Attributes exposing(style, class, src)
 import Random exposing (list, int, pair)
@@ -218,17 +218,31 @@ update msg model =
 toHtmlField: Int -> Int -> Field -> Html Msg
 toHtmlField x y f =
   let
-    attributes = [ onClick (Click x y)
-                  ,onRightClick (ToggleFlag x y)
-                  ,style "text-align" "center"
-                  ,style "size" "36px"
-                  ,style "height" "36px"
-                  ,style "width" "36px"
-                  ,style "background-color"
+    borders =
+      [ style "border" "4px solid"
+      , style "border-left-color" "lightgrey"
+      , style "border-top-color" "lightgrey"
+      , style "border-right-color" "#404040"
+      , style "border-bottom-color" "#404040"
+      ]
+    attributes = List.append
+      [ onClick (Click x y)
+      , onRightClick (ToggleFlag x y)
+      , style "text-align" "center"
+      , style "size" "36px"
+      , style "height" "28px"
+      , style "width" "28px"
+      , style "background-color" "grey"
+      , style "background-color"
                     (if (f == Hidden || f == Flag)
                       then "darkgrey"
                       else "lightgrey")
-                  ]
+      ]
+      (if (f == Hidden || f == Flag)
+        then borders
+        else
+          [ style "border" "solid 4px", style "border-color" "lightgrey" ])
+
   in
   case f of
     Hidden -> td attributes [text ""]
@@ -258,12 +272,23 @@ faceFor status =
 
 view: Model -> Html Msg
 view model =
-  let flagCount = (List.length model.bombs) - (List.length model.flags) in
-  div [] [ button [onClick Start] [text "Start!"]
-        , div [] [text (String.fromInt flagCount)]
-        , div [class "faceholder", style "height" "50px", style "width" "50px"]
-          [faceFor model.status]
-        , button [onClick ToggleMode] [text (textForMode model.mode)]
-        , table []
+  let
+    flagCount = (List.length model.bombs) - (List.length model.flags)
+    boardWidth = String.fromInt (2 + (Tuple.first model.size) * 40) ++ "px"
+  in
+  div []
+        [ div [ style "float" "left", style "width" "50px" ]
+          [text (String.fromInt flagCount)]
+        , div
+          [ class "faceholder", onClick Start, style "float" "left"
+          , style "height" "50px", style "width" "50px" ]
+          [ faceFor model.status ]
+        , table [ style "border-collapse" "separate", style "clear" "both" ]
             (Array.toList (Array.indexedMap toHtmlRow model.board))
+        , div
+          [ onClick ToggleMode , style "width" boardWidth, style "height" "36px"
+          , style "text-align" "center", style "vertical-align" "middle"
+          , style "background-color" "lightgrey", style "line-height" "36px"
+          ]
+          [ text (textForMode model.mode) ]
         ]

@@ -6012,21 +6012,37 @@ var elm$html$Html$Events$onClick = function (msg) {
 };
 var author$project$Main$toHtmlField = F3(
 	function (x, y, f) {
-		var attributes = _List_fromArray(
+		var borders = _List_fromArray(
 			[
-				elm$html$Html$Events$onClick(
-				A2(author$project$Main$Click, x, y)),
-				author$project$Main$onRightClick(
-				A2(author$project$Main$ToggleFlag, x, y)),
-				A2(elm$html$Html$Attributes$style, 'text-align', 'center'),
-				A2(elm$html$Html$Attributes$style, 'size', '36px'),
-				A2(elm$html$Html$Attributes$style, 'height', '36px'),
-				A2(elm$html$Html$Attributes$style, 'width', '36px'),
-				A2(
-				elm$html$Html$Attributes$style,
-				'background-color',
-				(_Utils_eq(f, author$project$Main$Hidden) || _Utils_eq(f, author$project$Main$Flag)) ? 'darkgrey' : 'lightgrey')
+				A2(elm$html$Html$Attributes$style, 'border', '4px solid'),
+				A2(elm$html$Html$Attributes$style, 'border-left-color', 'lightgrey'),
+				A2(elm$html$Html$Attributes$style, 'border-top-color', 'lightgrey'),
+				A2(elm$html$Html$Attributes$style, 'border-right-color', '#404040'),
+				A2(elm$html$Html$Attributes$style, 'border-bottom-color', '#404040')
 			]);
+		var attributes = A2(
+			elm$core$List$append,
+			_List_fromArray(
+				[
+					elm$html$Html$Events$onClick(
+					A2(author$project$Main$Click, x, y)),
+					author$project$Main$onRightClick(
+					A2(author$project$Main$ToggleFlag, x, y)),
+					A2(elm$html$Html$Attributes$style, 'text-align', 'center'),
+					A2(elm$html$Html$Attributes$style, 'size', '36px'),
+					A2(elm$html$Html$Attributes$style, 'height', '28px'),
+					A2(elm$html$Html$Attributes$style, 'width', '28px'),
+					A2(elm$html$Html$Attributes$style, 'background-color', 'grey'),
+					A2(
+					elm$html$Html$Attributes$style,
+					'background-color',
+					(_Utils_eq(f, author$project$Main$Hidden) || _Utils_eq(f, author$project$Main$Flag)) ? 'darkgrey' : 'lightgrey')
+				]),
+			(_Utils_eq(f, author$project$Main$Hidden) || _Utils_eq(f, author$project$Main$Flag)) ? borders : _List_fromArray(
+				[
+					A2(elm$html$Html$Attributes$style, 'border', 'solid 4px'),
+					A2(elm$html$Html$Attributes$style, 'border-color', 'lightgrey')
+				]));
 		switch (f.$) {
 			case 'Hidden':
 				return A2(
@@ -6152,29 +6168,23 @@ var author$project$Main$toHtmlRow = F2(
 					author$project$Main$toHtmlField(x),
 					arr)));
 	});
-var elm$html$Html$button = _VirtualDom_node('button');
 var elm$html$Html$div = _VirtualDom_node('div');
 var elm$html$Html$table = _VirtualDom_node('table');
 var author$project$Main$view = function (model) {
 	var flagCount = elm$core$List$length(model.bombs) - elm$core$List$length(model.flags);
+	var boardWidth = elm$core$String$fromInt(2 + (model.size.a * 40)) + 'px';
 	return A2(
 		elm$html$Html$div,
 		_List_Nil,
 		_List_fromArray(
 			[
 				A2(
-				elm$html$Html$button,
-				_List_fromArray(
-					[
-						elm$html$Html$Events$onClick(author$project$Main$Start)
-					]),
-				_List_fromArray(
-					[
-						elm$html$Html$text('Start!')
-					])),
-				A2(
 				elm$html$Html$div,
-				_List_Nil,
+				_List_fromArray(
+					[
+						A2(elm$html$Html$Attributes$style, 'float', 'left'),
+						A2(elm$html$Html$Attributes$style, 'width', '50px')
+					]),
 				_List_fromArray(
 					[
 						elm$html$Html$text(
@@ -6185,6 +6195,8 @@ var author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						elm$html$Html$Attributes$class('faceholder'),
+						elm$html$Html$Events$onClick(author$project$Main$Start),
+						A2(elm$html$Html$Attributes$style, 'float', 'left'),
 						A2(elm$html$Html$Attributes$style, 'height', '50px'),
 						A2(elm$html$Html$Attributes$style, 'width', '50px')
 					]),
@@ -6193,21 +6205,31 @@ var author$project$Main$view = function (model) {
 						author$project$Main$faceFor(model.status)
 					])),
 				A2(
-				elm$html$Html$button,
+				elm$html$Html$table,
 				_List_fromArray(
 					[
-						elm$html$Html$Events$onClick(author$project$Main$ToggleMode)
+						A2(elm$html$Html$Attributes$style, 'border-collapse', 'separate'),
+						A2(elm$html$Html$Attributes$style, 'clear', 'both')
+					]),
+				elm$core$Array$toList(
+					A2(elm$core$Array$indexedMap, author$project$Main$toHtmlRow, model.board))),
+				A2(
+				elm$html$Html$div,
+				_List_fromArray(
+					[
+						elm$html$Html$Events$onClick(author$project$Main$ToggleMode),
+						A2(elm$html$Html$Attributes$style, 'width', boardWidth),
+						A2(elm$html$Html$Attributes$style, 'height', '36px'),
+						A2(elm$html$Html$Attributes$style, 'text-align', 'center'),
+						A2(elm$html$Html$Attributes$style, 'vertical-align', 'middle'),
+						A2(elm$html$Html$Attributes$style, 'background-color', 'lightgrey'),
+						A2(elm$html$Html$Attributes$style, 'line-height', '36px')
 					]),
 				_List_fromArray(
 					[
 						elm$html$Html$text(
 						author$project$Main$textForMode(model.mode))
-					])),
-				A2(
-				elm$html$Html$table,
-				_List_Nil,
-				elm$core$Array$toList(
-					A2(elm$core$Array$indexedMap, author$project$Main$toHtmlRow, model.board)))
+					]))
 			]));
 };
 var elm$browser$Browser$External = function (a) {
