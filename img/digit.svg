@@ -1,0 +1,14 @@
+<svg viewBox="0 0 300 600" xmlns="http://www.w3.org/2000/svg">
+  <rect x="0" y="0" width="300" height="600" />
+  <g class="digit-background" fill="darkred" >
+    <path d="M 10 20 l 60 60 l 0 150 l -60 60 Z" />
+    <path d="M 290 20 l -60 60 l 0 150 l 60 60 Z" />
+    <path d="M 10 310 l 60 60 l 0 150 l -60 60 Z" />
+    <path d="M 290 310 l -60 60 l 0 150 l 60 60 Z" />
+
+    <path d="M 20 10 l 60 60 l 140 0 l 60 -60 Z" />
+    <path d="M 20 590 l 60 -60 l 140 0 l 60 60 Z" />
+
+    <path d="M 30 300 l 50 -50 l 140 0 l 50 50 l -50 50 l -140 0 Z" />
+  </g>
+</svg>

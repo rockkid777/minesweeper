@@ -6168,10 +6168,244 @@ var author$project$Main$toHtmlRow = F2(
 					author$project$Main$toHtmlField(x),
 					arr)));
 	});
+var author$project$Visuals$bottom = A2(
+	elm$svg$Svg$path,
+	_List_fromArray(
+		[
+			elm$svg$Svg$Attributes$d('M 20 590 l 60 -60 l 140 0 l 60 60 Z')
+		]),
+	_List_Nil);
+var author$project$Visuals$bottomLeft = A2(
+	elm$svg$Svg$path,
+	_List_fromArray(
+		[
+			elm$svg$Svg$Attributes$d('M 10 310 l 60 60 l 0 150 l -60 60 Z')
+		]),
+	_List_Nil);
+var author$project$Visuals$bottomRight = A2(
+	elm$svg$Svg$path,
+	_List_fromArray(
+		[
+			elm$svg$Svg$Attributes$d('M 290 310 l -60 60 l 0 150 l 60 60 Z')
+		]),
+	_List_Nil);
+var author$project$Visuals$center = A2(
+	elm$svg$Svg$path,
+	_List_fromArray(
+		[
+			elm$svg$Svg$Attributes$d('M 30 300 l 50 -50 l 140 0 l 50 50 l -50 50 l -140 0 Z')
+		]),
+	_List_Nil);
+var author$project$Visuals$top = A2(
+	elm$svg$Svg$path,
+	_List_fromArray(
+		[
+			elm$svg$Svg$Attributes$d('M 20 10 l 60 60 l 140 0 l 60 -60 Z')
+		]),
+	_List_Nil);
+var author$project$Visuals$topLeft = A2(
+	elm$svg$Svg$path,
+	_List_fromArray(
+		[
+			elm$svg$Svg$Attributes$d('M 10 20 l 60 60 l 0 150 l -60 60 Z')
+		]),
+	_List_Nil);
+var author$project$Visuals$topRight = A2(
+	elm$svg$Svg$path,
+	_List_fromArray(
+		[
+			elm$svg$Svg$Attributes$d('M 290 20 l -60 60 l 0 150 l 60 60 Z')
+		]),
+	_List_Nil);
+var elm$svg$Svg$rect = elm$svg$Svg$trustedNode('rect');
+var elm$svg$Svg$Attributes$height = _VirtualDom_attribute('height');
+var elm$svg$Svg$Attributes$width = _VirtualDom_attribute('width');
+var elm$svg$Svg$Attributes$x = _VirtualDom_attribute('x');
+var elm$svg$Svg$Attributes$y = _VirtualDom_attribute('y');
+var author$project$Visuals$withBackground = function (nodes) {
+	return A2(
+		elm$svg$Svg$svg,
+		_List_fromArray(
+			[
+				elm$svg$Svg$Attributes$viewBox('0 0 300 600')
+			]),
+		_List_fromArray(
+			[
+				A2(
+				elm$svg$Svg$rect,
+				_List_fromArray(
+					[
+						elm$svg$Svg$Attributes$x('0'),
+						elm$svg$Svg$Attributes$y('0'),
+						elm$svg$Svg$Attributes$width('300'),
+						elm$svg$Svg$Attributes$height('600'),
+						elm$svg$Svg$Attributes$fill('black')
+					]),
+				_List_Nil),
+				A2(
+				elm$svg$Svg$g,
+				_List_fromArray(
+					[
+						elm$svg$Svg$Attributes$class('digit-background'),
+						elm$svg$Svg$Attributes$fill('maroon')
+					]),
+				_List_fromArray(
+					[author$project$Visuals$topLeft, author$project$Visuals$bottomLeft, author$project$Visuals$topRight, author$project$Visuals$bottomRight, author$project$Visuals$top, author$project$Visuals$center, author$project$Visuals$bottom])),
+				A2(
+				elm$svg$Svg$g,
+				_List_fromArray(
+					[
+						elm$svg$Svg$Attributes$class('digit-foreground'),
+						elm$svg$Svg$Attributes$fill('red')
+					]),
+				nodes)
+			]));
+};
+var author$project$Visuals$digitFor = function (n) {
+	switch (n) {
+		case 1:
+			return author$project$Visuals$withBackground(
+				_List_fromArray(
+					[author$project$Visuals$topRight, author$project$Visuals$bottomRight]));
+		case 2:
+			return author$project$Visuals$withBackground(
+				_List_fromArray(
+					[author$project$Visuals$top, author$project$Visuals$center, author$project$Visuals$bottom, author$project$Visuals$topRight, author$project$Visuals$bottomLeft]));
+		case 3:
+			return author$project$Visuals$withBackground(
+				_List_fromArray(
+					[author$project$Visuals$top, author$project$Visuals$center, author$project$Visuals$bottom, author$project$Visuals$topRight, author$project$Visuals$bottomRight]));
+		case 4:
+			return author$project$Visuals$withBackground(
+				_List_fromArray(
+					[author$project$Visuals$topLeft, author$project$Visuals$center, author$project$Visuals$topRight, author$project$Visuals$bottomRight]));
+		case 5:
+			return author$project$Visuals$withBackground(
+				_List_fromArray(
+					[author$project$Visuals$topLeft, author$project$Visuals$top, author$project$Visuals$center, author$project$Visuals$bottomRight, author$project$Visuals$bottom]));
+		case 6:
+			return author$project$Visuals$withBackground(
+				_List_fromArray(
+					[author$project$Visuals$topLeft, author$project$Visuals$top, author$project$Visuals$center, author$project$Visuals$bottomLeft, author$project$Visuals$bottomRight, author$project$Visuals$bottom]));
+		case 7:
+			return author$project$Visuals$withBackground(
+				_List_fromArray(
+					[author$project$Visuals$top, author$project$Visuals$topRight, author$project$Visuals$bottomRight]));
+		case 8:
+			return author$project$Visuals$withBackground(
+				_List_fromArray(
+					[author$project$Visuals$topLeft, author$project$Visuals$bottomLeft, author$project$Visuals$topRight, author$project$Visuals$bottomRight, author$project$Visuals$top, author$project$Visuals$center, author$project$Visuals$bottom]));
+		case 9:
+			return author$project$Visuals$withBackground(
+				_List_fromArray(
+					[author$project$Visuals$topLeft, author$project$Visuals$top, author$project$Visuals$center, author$project$Visuals$topRight, author$project$Visuals$bottomRight, author$project$Visuals$bottom]));
+		default:
+			return author$project$Visuals$withBackground(
+				_List_fromArray(
+					[author$project$Visuals$topLeft, author$project$Visuals$bottomLeft, author$project$Visuals$topRight, author$project$Visuals$bottomRight, author$project$Visuals$top, author$project$Visuals$bottom]));
+	}
+};
+var elm$core$Basics$modBy = _Basics_modBy;
+var author$project$Visuals$displayForHelper = F2(
+	function (n, prev) {
+		displayForHelper:
+		while (true) {
+			if (!n) {
+				return A2(
+					elm$core$List$cons,
+					author$project$Visuals$digitFor(0),
+					prev);
+			} else {
+				var $temp$n = (n / 10) | 0,
+					$temp$prev = A2(
+					elm$core$List$cons,
+					author$project$Visuals$digitFor(
+						A2(elm$core$Basics$modBy, 10, n)),
+					prev);
+				n = $temp$n;
+				prev = $temp$prev;
+				continue displayForHelper;
+			}
+		}
+	});
+var author$project$Visuals$displayFor = function (n) {
+	return A2(author$project$Visuals$displayForHelper, n, _List_Nil);
+};
+var elm$core$Basics$pow = _Basics_pow;
+var elm$core$List$map = F2(
+	function (f, xs) {
+		return A3(
+			elm$core$List$foldr,
+			F2(
+				function (x, acc) {
+					return A2(
+						elm$core$List$cons,
+						f(x),
+						acc);
+				}),
+			_List_Nil,
+			xs);
+	});
+var elm$core$List$repeatHelp = F3(
+	function (result, n, value) {
+		repeatHelp:
+		while (true) {
+			if (n <= 0) {
+				return result;
+			} else {
+				var $temp$result = A2(elm$core$List$cons, value, result),
+					$temp$n = n - 1,
+					$temp$value = value;
+				result = $temp$result;
+				n = $temp$n;
+				value = $temp$value;
+				continue repeatHelp;
+			}
+		}
+	});
+var elm$core$List$repeat = F2(
+	function (n, value) {
+		return A3(elm$core$List$repeatHelp, _List_Nil, n, value);
+	});
+var author$project$Visuals$displayForWithSize = F2(
+	function (n, s) {
+		if (_Utils_cmp(
+			n,
+			A2(elm$core$Basics$pow, 10, s + 1)) > -1) {
+			return author$project$Visuals$displayFor(
+				A2(elm$core$Basics$pow, 10, s + 1) - 1);
+		} else {
+			var digits = author$project$Visuals$displayFor(n);
+			var d = s - elm$core$List$length(digits);
+			var padding = A2(
+				elm$core$List$map,
+				author$project$Visuals$digitFor,
+				A2(elm$core$List$repeat, d, 0));
+			return _Utils_ap(padding, digits);
+		}
+	});
 var elm$html$Html$div = _VirtualDom_node('div');
 var elm$html$Html$table = _VirtualDom_node('table');
 var author$project$Main$view = function (model) {
 	var flagCount = elm$core$List$length(model.bombs) - elm$core$List$length(model.flags);
+	var digits = A2(
+		elm$core$List$map,
+		function (d) {
+			return A2(
+				elm$html$Html$div,
+				_List_fromArray(
+					[
+						elm$html$Html$Attributes$class('digit'),
+						A2(elm$html$Html$Attributes$style, 'margin', '0'),
+						A2(elm$html$Html$Attributes$style, 'width', '25px'),
+						A2(elm$html$Html$Attributes$style, 'height', '50px'),
+						A2(elm$html$Html$Attributes$style, 'padding', '0'),
+						A2(elm$html$Html$Attributes$style, 'float', 'left')
+					]),
+				_List_fromArray(
+					[d]));
+		},
+		A2(author$project$Visuals$displayForWithSize, flagCount, 3));
 	var boardWidth = elm$core$String$fromInt(2 + (model.size.a * 40)) + 'px';
 	return A2(
 		elm$html$Html$div,
@@ -6183,12 +6417,19 @@ var author$project$Main$view = function (model) {
 				_List_fromArray(
 					[
 						A2(elm$html$Html$Attributes$style, 'float', 'left'),
-						A2(elm$html$Html$Attributes$style, 'width', '50px')
+						A2(elm$html$Html$Attributes$style, 'width', '75px')
 					]),
 				_List_fromArray(
 					[
-						elm$html$Html$text(
-						elm$core$String$fromInt(flagCount))
+						A2(
+						elm$html$Html$div,
+						_List_fromArray(
+							[
+								elm$html$Html$Attributes$class('display'),
+								A2(elm$html$Html$Attributes$style, 'height', '50px'),
+								A2(elm$html$Html$Attributes$style, 'width', '75px')
+							]),
+						digits)
 					])),
 				A2(
 				elm$html$Html$div,
@@ -6254,20 +6495,6 @@ var elm$core$Task$Perform = function (a) {
 	return {$: 'Perform', a: a};
 };
 var elm$core$Task$init = elm$core$Task$succeed(_Utils_Tuple0);
-var elm$core$List$map = F2(
-	function (f, xs) {
-		return A3(
-			elm$core$List$foldr,
-			F2(
-				function (x, acc) {
-					return A2(
-						elm$core$List$cons,
-						f(x),
-						acc);
-				}),
-			_List_Nil,
-			xs);
-	});
 var elm$core$Task$map = F2(
 	function (func, taskA) {
 		return A2(

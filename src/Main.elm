@@ -275,10 +275,16 @@ view model =
   let
     flagCount = (List.length model.bombs) - (List.length model.flags)
     boardWidth = String.fromInt (2 + (Tuple.first model.size) * 40) ++ "px"
+    digits = Visuals.displayForWithSize flagCount 3
+      |> List.map (\d -> div [ class "digit", style "margin" "0"
+        , style "width" "25px", style "height" "50px", style "padding" "0"
+        , style "float" "left" ] [ d ])
   in
   div []
-        [ div [ style "float" "left", style "width" "50px" ]
-          [text (String.fromInt flagCount)]
+        [ div [ style "float" "left", style "width" "75px" ]
+          [ div [ class "display", style "height" "50px", style "width" "75px" ]
+            digits
+          ]
         , div
           [ class "faceholder", onClick Start, style "float" "left"
           , style "height" "50px", style "width" "50px" ]
