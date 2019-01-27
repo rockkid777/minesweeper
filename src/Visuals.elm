@@ -7,7 +7,7 @@ import List
 withFace: List (Svg msg) -> Html msg
 withFace nodes = svg [ viewBox "0 0 300 300" ]
   <| List.append
-    [ circle [ cx "150", cy "150", r "145", fill "yellow"  ] []]
+    [ circle [ cx "150", cy "150", r "145", fill "yellow", stroke "black" ] []]
     nodes
 
 deadEyes: Svg msg

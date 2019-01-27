@@ -3,8 +3,9 @@ import Browser
 import Array exposing (Array)
 import Maybe exposing (andThen)
 import Html exposing (Html, button, div, text, table, td, tr, i, p)
-import Html.Events exposing(onClick)
-import Html.Attributes exposing(style, class, src)
+import Html.Events exposing (onClick)
+import Html.Attributes exposing (style, class, src)
+import Time exposing (every)
 import Random exposing (list, int, pair)
 import Json.Decode as Decode
 import Visuals exposing (..)
@@ -24,6 +25,7 @@ type alias Model = { size: (Int, Int)
                   , mode: Mode
                   , flags: List (Int, Int)
                   , status: GameStatus
+                  , playTime: Int
                 }
 
 type Msg = Start
@@ -31,6 +33,7 @@ type Msg = Start
           | ToggleMode
           | Click Int Int
           | ToggleFlag Int Int
+          | Tick Time.Posix
 
 onRightClick: msg -> Html.Attribute msg
 onRightClick m =
@@ -49,13 +52,13 @@ init: Int -> (Model, Cmd msg)
 init _ = (
   { board = (genBoard (8, 8))
     , bombs = [], discovered = 0, size = (8, 8), mode = Normal
-    , flags = [], status = Stopped
+    , flags = [], status = Stopped, playTime = 0
   }
   , Cmd.none
   )
 
 main = Browser.element { init = init
-                        ,subscriptions = (\model -> Sub.none)
+                        ,subscriptions = (\model -> Time.every 1000 Tick)
                         ,update = update, view = view}
 
 isBomb: (Int, Int) -> List (Int, Int) -> Bool
@@ -184,7 +187,9 @@ update msg model =
   case msg of
     Start ->
       ({ model | board = (genBoard model.size)
-      , discovered = 0, bombs = [], flags = [], status = Running }, genBomb)
+        , discovered = 0, bombs = [], flags = [], status = Running
+        , playTime = 0 }
+      , genBomb)
     NewGame b ->
       if (List.member b model.bombs) then
         (model, genBomb)
@@ -213,7 +218,10 @@ update msg model =
           _ -> (model, Cmd.none)
       else
         (model, Cmd.none)
-
+    Tick _ ->
+      case model.status of
+        Running -> ({ model | playTime = model.playTime + 1 }, Cmd.none)
+        _ -> (model, Cmd.none)
 
 toHtmlField: Int -> Int -> Field -> Html Msg
 toHtmlField x y f =
@@ -275,20 +283,27 @@ view model =
   let
     flagCount = (List.length model.bombs) - (List.length model.flags)
     boardWidth = String.fromInt (2 + (Tuple.first model.size) * 40) ++ "px"
-    digits = Visuals.displayForWithSize flagCount 3
-      |> List.map (\d -> div [ class "digit", style "margin" "0"
-        , style "width" "25px", style "height" "50px", style "padding" "0"
-        , style "float" "left" ] [ d ])
+    digitWrapper = (\d -> div [ class "digit", style "margin" "0"
+      , style "width" "25px", style "height" "50px", style "padding" "0"
+      , style "float" "left" ] [ d ])
+    bombsDisplay = Visuals.displayForWithSize flagCount 3
+      |> List.map digitWrapper
+    timeDisplay = Visuals.displayForWithSize model.playTime 3
+      |> List.map digitWrapper
   in
-  div []
+  div [ style "width" boardWidth ]
         [ div [ style "float" "left", style "width" "75px" ]
           [ div [ class "display", style "height" "50px", style "width" "75px" ]
-            digits
+            bombsDisplay
           ]
         , div
           [ class "faceholder", onClick Start, style "float" "left"
           , style "height" "50px", style "width" "50px" ]
           [ faceFor model.status ]
+        , div [ style "float" "right", style "width" "75px" ]
+          [ div [ class "display", style "height" "50px", style "width" "75px" ]
+            timeDisplay
+          ]
         , table [ style "border-collapse" "separate", style "clear" "both" ]
             (Array.toList (Array.indexedMap toHtmlRow model.board))
         , div
