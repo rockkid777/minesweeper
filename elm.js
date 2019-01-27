@@ -6441,8 +6441,8 @@ var author$project$Main$view = function (model) {
 				elm$html$Html$div,
 				_List_fromArray(
 					[
-						A2(elm$html$Html$Attributes$style, 'float', 'left'),
-						A2(elm$html$Html$Attributes$style, 'width', '75px')
+						elm$html$Html$Attributes$class('statContainer'),
+						A2(elm$html$Html$Attributes$style, 'display', 'flex')
 					]),
 				_List_fromArray(
 					[
@@ -6450,44 +6450,56 @@ var author$project$Main$view = function (model) {
 						elm$html$Html$div,
 						_List_fromArray(
 							[
-								elm$html$Html$Attributes$class('display'),
-								A2(elm$html$Html$Attributes$style, 'height', '50px'),
+								A2(elm$html$Html$Attributes$style, 'float', 'left'),
 								A2(elm$html$Html$Attributes$style, 'width', '75px')
 							]),
-						bombsDisplay)
-					])),
-				A2(
-				elm$html$Html$div,
-				_List_fromArray(
-					[
-						elm$html$Html$Attributes$class('faceholder'),
-						elm$html$Html$Events$onClick(author$project$Main$Start),
-						A2(elm$html$Html$Attributes$style, 'float', 'left'),
-						A2(elm$html$Html$Attributes$style, 'height', '50px'),
-						A2(elm$html$Html$Attributes$style, 'width', '50px')
-					]),
-				_List_fromArray(
-					[
-						author$project$Main$faceFor(model.status)
-					])),
-				A2(
-				elm$html$Html$div,
-				_List_fromArray(
-					[
-						A2(elm$html$Html$Attributes$style, 'float', 'right'),
-						A2(elm$html$Html$Attributes$style, 'width', '75px')
-					]),
-				_List_fromArray(
-					[
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$div,
+								_List_fromArray(
+									[
+										elm$html$Html$Attributes$class('display'),
+										A2(elm$html$Html$Attributes$style, 'height', '50px'),
+										A2(elm$html$Html$Attributes$style, 'width', '75px')
+									]),
+								bombsDisplay)
+							])),
 						A2(
 						elm$html$Html$div,
 						_List_fromArray(
 							[
-								elm$html$Html$Attributes$class('display'),
+								elm$html$Html$Attributes$class('faceholder'),
+								elm$html$Html$Events$onClick(author$project$Main$Start),
+								A2(elm$html$Html$Attributes$style, 'float', 'left'),
+								A2(elm$html$Html$Attributes$style, 'margin-left', 'auto'),
+								A2(elm$html$Html$Attributes$style, 'margin-right', 'auto'),
 								A2(elm$html$Html$Attributes$style, 'height', '50px'),
+								A2(elm$html$Html$Attributes$style, 'width', '50px')
+							]),
+						_List_fromArray(
+							[
+								author$project$Main$faceFor(model.status)
+							])),
+						A2(
+						elm$html$Html$div,
+						_List_fromArray(
+							[
+								A2(elm$html$Html$Attributes$style, 'float', 'right'),
 								A2(elm$html$Html$Attributes$style, 'width', '75px')
 							]),
-						timeDisplay)
+						_List_fromArray(
+							[
+								A2(
+								elm$html$Html$div,
+								_List_fromArray(
+									[
+										elm$html$Html$Attributes$class('display'),
+										A2(elm$html$Html$Attributes$style, 'height', '50px'),
+										A2(elm$html$Html$Attributes$style, 'width', '75px')
+									]),
+								timeDisplay)
+							]))
 					])),
 				A2(
 				elm$html$Html$table,

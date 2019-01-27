@@ -292,24 +292,26 @@ view model =
       |> List.map digitWrapper
   in
   div [ style "width" boardWidth ]
-        [ div [ style "float" "left", style "width" "75px" ]
-          [ div [ class "display", style "height" "50px", style "width" "75px" ]
-            bombsDisplay
-          ]
-        , div
-          [ class "faceholder", onClick Start, style "float" "left"
-          , style "height" "50px", style "width" "50px" ]
-          [ faceFor model.status ]
-        , div [ style "float" "right", style "width" "75px" ]
-          [ div [ class "display", style "height" "50px", style "width" "75px" ]
-            timeDisplay
-          ]
-        , table [ style "border-collapse" "separate", style "clear" "both" ]
-            (Array.toList (Array.indexedMap toHtmlRow model.board))
-        , div
-          [ onClick ToggleMode , style "width" boardWidth, style "height" "36px"
-          , style "text-align" "center", style "vertical-align" "middle"
-          , style "background-color" "lightgrey", style "line-height" "36px"
-          ]
-          [ text (textForMode model.mode) ]
+    [ div [ class "statContainer", style "display" "flex" ] 
+      [ div [ style "float" "left", style "width" "75px" ]
+        [ div [ class "display", style "height" "50px", style "width" "75px" ]
+          bombsDisplay
         ]
+      , div
+        [ class "faceholder", onClick Start, style "float" "left", style "margin-left" "auto", style "margin-right" "auto"
+        , style "height" "50px", style "width" "50px" ]
+        [ faceFor model.status ]
+      , div [ style "float" "right", style "width" "75px" ]
+        [ div [ class "display", style "height" "50px", style "width" "75px" ]
+          timeDisplay
+        ]
+      ]
+    , table [ style "border-collapse" "separate", style "clear" "both" ]
+        (Array.toList (Array.indexedMap toHtmlRow model.board))
+    , div
+      [ onClick ToggleMode , style "width" boardWidth, style "height" "36px"
+      , style "text-align" "center", style "vertical-align" "middle"
+      , style "background-color" "lightgrey", style "line-height" "36px"
+      ]
+      [ text (textForMode model.mode) ]
+    ]
